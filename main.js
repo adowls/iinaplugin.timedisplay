@@ -29,20 +29,20 @@ function updateClock() {
         const date = new Date();
         const systemTimeString = date.toLocaleTimeString('en-US', { hour12: false });
 
-        let leftText = "00:00 : 00:00 - 00:00";
-        let centerText = systemTimeString;
-        let rightText = "";
+        let videoTimeText = "00:00 : 00:00 - 00:00";
+        let systemTimeText = systemTimeString;
+        let videoNameText = "";
 
         if (core && core.status) {
             // Fetch title or filename safely
             const title = core.status.title;
             const filename = core.status.filename;
             if (title) {
-                rightText = title;
+                videoNameText = title;
             } else if (filename) {
-                rightText = filename;
+                videoNameText = filename;
             }
-            
+
             const duration = core.status.duration;
             const corePos = core.status.position;
             const paused = core.status.paused;
@@ -63,18 +63,18 @@ function updateClock() {
                 if (virtualPos > duration) virtualPos = duration;
 
                 const remaining = Math.max(0, duration - virtualPos);
-                
+
                 // Format: Total : Played - Remaining
-                leftText = `${formatTime(duration)} : ${formatTime(virtualPos)} - ${formatTime(remaining)}`;
+                videoTimeText = `${formatTime(duration)} : ${formatTime(virtualPos)} - ${formatTime(remaining)}`;
             }
         }
 
         // Use fixed positioning relative to viewport to avoid container collapsing issues
         overlay.setContent(`
             <div id="osd-container">
-                <div id="left" class="osd-item">${leftText}</div>
-                <div id="center" class="osd-item">${centerText}</div>
-                <div id="right" class="osd-item">${rightText}</div>
+                <div id="left" class="osd-item">${videoTimeText}</div>
+                <div id="center" class="osd-item">${videoNameText}</div>
+                <div id="right" class="osd-item">${systemTimeText}</div>
             </div>
         `);
     } catch (e) {

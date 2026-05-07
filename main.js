@@ -113,7 +113,7 @@ function init() {
         }
         .osd-item {
             position: fixed;
-            top: 24px;
+            top: 0px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             font-size: 18px;
             font-weight: 600;
@@ -129,14 +129,14 @@ function init() {
             z-index: 1000;
         }
         #left {
-            left: 24px;
+            left: 0px;
         }
         #center {
             left: 50%;
             transform: translateX(-50%);
         }
         #right {
-            right: 24px;
+            right: 0px;
             max-width: 35vw;
             overflow: hidden;
             text-overflow: ellipsis;
